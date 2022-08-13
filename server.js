@@ -6,10 +6,10 @@ const PORT = process.env.PORT || 5309;
 const session = require('express-session');
 const SeqStorage = require('connect-session-sequelize')(session.Store);
 
-const {routes, authentication} = require('./controllers');
+const {route_views, authentication} = require('./controllers');
 
 const app = express();
-app.use(routes);
+app.use(route_views);
 
 
 app.use(express.static(path.join('front')));
@@ -32,7 +32,7 @@ app.use(session({
     }
 }));
 
-app.use('/', routes);
+app.use('/', route_views);
 app.use('/auth', authentication);
 
 

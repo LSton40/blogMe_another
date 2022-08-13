@@ -1,0 +1,62 @@
+
+
+
+<main id="dashboard-posts">
+    <div class="posting">
+        <div class="post-heading">
+            <h3 class="post-title">Post Title</h3>
+            <p class="post-author">Author</p>
+            <p class="post-date">Date</p>
+        </div>
+            <p class="post-text">This is what I write</p>
+        {{#if blogger}}
+        <div>
+            <button class="comment-btn">Update Post</button>
+            <button class="comment-btn">Delete Post</button>
+        </div>
+        {{/if}}
+        
+        
+        
+        <div class="listed-comments">
+            <div class="comment-heading">
+                <p class="comment-body">Comment body</p>
+                <h4 class="commentor">Commentor</h4>
+                <p class="comment-date">Date</p>
+            </div>
+
+        </div>
+        {{#if blogger}}
+        {{!-- <div class="comment">
+            
+            <form action="">
+                <input type="text" class="comment-here">
+                <button class="comment-btn">Comment</button>
+            </form>
+        </div> --}}
+        {{/if}}
+    </div>
+
+
+</main>
+
+<section >
+    {{#if}}
+        <form action="">
+            <input type="text" class="blog-title">
+            <input type="textarea" class="blog-post">
+            <button class="submit" id="create-post">Create</button>
+        </form>
+        {{else}}
+        <p>You're not supposed to be here!</p>
+    {{/if}}
+</section>
+
+
+
+
+
+<footer>
+    <button class="add-btn">Add New Post</button>
+
+</footer>

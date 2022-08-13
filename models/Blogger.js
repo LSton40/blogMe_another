@@ -12,13 +12,6 @@ Blogger.init({
             len: 3
         }
     },
-    remittance: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            isEmail: true
-        }
-    },
     magicword: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -35,8 +28,8 @@ Blogger.init({
     modelName: 'blogger',
     hooks: {
         async disguiseMe(blogger) {
-            const hashIt = await encrypt.hash(blogger.remittance, 16);
-            blogger.remittance = hashIt;
+            const hashIt = await encrypt.hash(blogger.magicword, 16);
+            blogger.magicword = hashIt;
         }
     }
 });

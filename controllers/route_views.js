@@ -11,17 +11,16 @@ router.get('/', loggedIn, (req, res) => {
             where: {
                 id: userId
             },
-            attributes: ['id', 'remittance', 'handle']
+            attributes: ['id', 'handle']
         })
         .then(blogger => {
             blogger = {
                 handle: blogger.handle,
-                remittance: blogger.remittance
             };
             res.render('index', {blogger});
         });
     }
-    res.render('idnex');
+    res.render('index');
 });
 
 router.get('/login', loggedIn, (req, res) => {
