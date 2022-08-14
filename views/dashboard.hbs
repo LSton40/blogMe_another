@@ -1,7 +1,7 @@
 
 
 
-<main id="dashboard-posts">
+<main class="prev-posts">
     <div class="posting">
         <div class="post-heading">
             <h3 class="post-title">Post Title</h3>
@@ -10,31 +10,31 @@
         </div>
             <p class="post-text">This is what I write</p>
         {{#if blogger}}
-        <div>
+        <div class="edit-post">
             <button class="comment-btn">Update Post</button>
-            <button class="comment-btn">Delete Post</button>
+            <button class="delete-btn">Delete Post</button>
         </div>
         {{/if}}
         
         
-        
-        <div class="listed-comments">
-            <div class="comment-heading">
-                <p class="comment-body">Comment body</p>
-                <h4 class="commentor">Commentor</h4>
-                <p class="comment-date">Date</p>
-            </div>
-
-        </div>
         {{#if blogger}}
         {{!-- <div class="comment">
             
-            <form action="">
+            <form action="" class="comment">
                 <input type="text" class="comment-here">
                 <button class="comment-btn">Comment</button>
             </form>
         </div> --}}
         {{/if}}
+        
+        <div class="listed-comments">
+            <p class="comment-body">Comment body</p>
+            <div class="comment-heading">
+                <h4 class="commentor">Commentor</h4>
+                <p class="comment-date">Date</p>
+            </div>
+
+        </div>
     </div>
 
 
