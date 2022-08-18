@@ -1,7 +1,19 @@
+<nav>
+    <a href="#">Home</a>
+        {{#if blogger}}
+            <a href="./dashboard.hbs">Dashboard</a>
+            <a href="./logout.hbs">Logout</a>
+            {{else}}
+                <a href="./register.hbs">Register</a>
+                <a href="./login.hbs">Login</a>
+        {{/if}}
+    <header>
+        <h1>Blog The Man Down</h1>
+    </header>
+</nav>
 
 
-
-<main class="prev-posts">
+<main class="prev-posts" id="dash-posts">
     <div class="posting">
         <div class="post-heading">
             <h3 class="post-title">Post Title</h3>
@@ -44,23 +56,23 @@
 
 </main>
 
-<section >
-    {{#if}}
-        <form action="">
+{{!-- <section > --}}
+        <form action="" id="new-post-box">
             <input type="text" class="blog-title">
-            <input type="textarea" class="blog-post">
+            <textarea class="blog-post" placeholder="New Post"></textarea>
             <button class="submit" id="create-post">Create</button>
         </form>
-        {{else}}
-        <p>You're not supposed to be here!</p>
-    {{/if}}
-</section>
+{{!-- </section> --}}
 
 
 
 
 
 <footer>
-    <button class="add-btn">Add New Post</button>
+    {{#if blogger}}
+        <button class="add-btn">Add New Post</button>
+        {{else}}
+        <p>You're not supposed to be here!</p>
 
+    {{/if}}
 </footer>

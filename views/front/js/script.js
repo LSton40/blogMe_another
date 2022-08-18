@@ -88,6 +88,9 @@ fetch(`/api/comments/${id}`, {
 const postList = document.querySelector('.prev-posts');
 // const postList = document.querySelector('#dashboard-posts');
 
+const postListHome = document.querySelector('#home-posts');
+const postListDash = document.querySelector('#dash-posts');
+
 
 
 
@@ -104,66 +107,134 @@ const printPosts = async (posts) => {
         const postBox = document.createElement('div');
         postBox.classList.add('posting');
         postList.append(postBox);
-    
-        const postHeading = document.createElement('div');
-        postHeading.classList.add('post-heading');
-        
-        const postTitle = document.createElement('h3');
-        postTitle.classList.add('post-title');
-        postTitle.textContent = title;
-    
-        const postAuthor = document.createElement('p');
-        postAuthor.classList.add('post-author');
-        postAuthor.textContent = author;
-    
-        const postDate = document.createElement('p');
-        postDate.classList.add('post-date');
-        postDate.textContent = date;
-    
-        postHeading.append(postTitle);
-        postHeading.append(postAuthor);
-        postHeading.append(postDate);
-    
-        const postBody = document.createElement('p');
-        postBody.classList.add('post-text');
-        postBody.textContent = post
-        
-        postBox.append(postHeading);
-        postBox.append(postBody);
 
-        const postEdit = document.createElement('div')
-        postEdit.classList.add('edit-post')
+
+        const homeDash = ` 
+        <div class="post-heading">
+            <h3 class="post-title">${title}</h3>
+            <p class="post-author">${author}</p>
+            <p class="post-date">${date}</p>
+        </div>
+            <p class="post-text">${post}</p> 
+            `;
+
+        const userDash = `
+        <div class="edit-post">
+            <button class="update-btn">Update Post</button>
+            <button class="delete-btn">Delete Post</button>
+        </div>
+        `;
+
+        const authHome = `
+        <form action="" class="comment">
+            <textarea class="comment-here" placeholder="Comment here"></textarea>
+            <button class="comment-btn">Comment</button>
+        </form>
+        `;
+
+
+        //But also manage Index vs Dashboard
+        if (userId === author.id && window.location.pathname === '/dashboard') {
+            postBox.innerHtml = homeDash + userDash + authHome;
+        } else if (blogger) {
+            postBox.innerHTML = homeDash + authHome;
+        } else {
+            postBox.innerHTML = homeDash;
+        }
+
+        // postBox.innerHTML = ` 
+        // <div class="post-heading">
+        //     <h3 class="post-title">${title}</h3>
+        //     <p class="post-author">${author}</p>
+        //     <p class="post-date">${date}</p>
+        // </div>
+        //     <p class="post-text">${post}</p> 
+        // {{#if blogger}}
+        // <div class="edit-post">
+        //     <button class="update-btn">Update Post</button>
+        //     <button class="delete-btn">Delete Post</button>
+        // </div>
+        // {{/if}}
+        // {{#if blogger}}
+        // <form action="" class="comment">
+        //     <textarea class="comment-here" placeholder="Comment here"></textarea>
+        //     <button class="comment-btn">Comment</button>
+        // </form>
+        // {{/if}}
+        //     `
+    
+
+
+
+
+
+        const updateBtn = document.querySelector('.update-btn');
+        const deleteBtn = document.querySelector('.delete-btn');
+        const commentSubmit = document.querySelector('.comment-btn');
+
+        // const postHeading = document.createElement('div');
+        // postHeading.classList.add('post-heading');
+        
+        // const postTitle = document.createElement('h3');
+        // postTitle.classList.add('post-title');
+        // postTitle.textContent = title;
+    
+        // const postAuthor = document.createElement('p');
+        // postAuthor.classList.add('post-author');
+        // postAuthor.textContent = author;
+    
+        // const postDate = document.createElement('p');
+        // postDate.classList.add('post-date');
+        // postDate.textContent = date;
+    
+        // postHeading.append(postTitle);
+        // postHeading.append(postAuthor);
+        // postHeading.append(postDate);
+    
+        // const postBody = document.createElement('p');
+        // postBody.classList.add('post-text');
+        // postBody.textContent = post
+        
+        // postBox.append(postHeading);
+        // postBox.append(postBody);
+
+        // const postEdit = document.createElement('div')
+        // postEdit.classList.add('edit-post')
 
         
-        const updateBtn = document.createElement('button')
-        updateBtn.classList.add('update-btn')
-        postEdit.append(updateBtn);
+        // const updateBtn = document.createElement('button')
+        // updateBtn.classList.add('update-btn')
+        // updateBtn.innerHTML = 'Update Post';
+        // postEdit.append(updateBtn);
         updateBtn.addEventListener('click', updatePostFunc)
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
-        postEdit.append(deleteBtn)
+        // const deleteBtn = document.createElement('button');
+        // deleteBtn.classList.add('delete-btn');
+        // deleteBtn.innerHTML = 'Delete Post';
+        // postEdit.append(deleteBtn)
         deleteBtn.addEventListener('click', deletePostFunc)
         
-        postBox.append(postEdit);
+        // postBox.append(postEdit);
 
 
-        const commentForm = document.createElement('form')
-        commentForm.classList.add('comment')
-        // commentForm.setAttribute('action', '')
+        // const commentForm = document.createElement('form')
+        // commentForm.classList.add('comment')
+        // // commentForm.setAttribute('action', '')
 
-        const commentBox = document.createElement('input')
-        commentBox.classList.add('comment-here');
-        // commentBox.innerHTML = 'blah'
-        commentForm.append(commentBox);
+        // const commentBox = document.createElement('input')
+        // commentBox.classList.add('comment-here');
+        // // commentBox.innerHTML = 'blah'
+        // commentForm.append(commentBox);
 
-        const commentSubmit = document.createElement('button')
-        commentSubmit.classList.add('comment-btn');
-        commentForm.append(commentSubmit);
+        // const commentSubmit = document.createElement('button')
+        // commentSubmit.classList.add('comment-btn');
+        // commentSubmit.innerHTML = 'Comment'
+        // commentForm.append(commentSubmit);
         commentSubmit.addEventListener('click', )
 
-        postBox.append(commentForm);
+        // postBox.append(commentForm);
 
+        
 
         
         return postBox;
@@ -198,53 +269,121 @@ const printPosts = async (posts) => {
 
 //separate function to add buttons needed on Dashboard: Update / Delete Post ?
 
+function printComments(comments) {
 
-function printComments(comment, comauthor, comdate) {
+    let renderedcomments = await comments.json();
+
+    // if (window.location.pathname === '/index') {
+        postBox.forEach((comment) => { comment.innerHTML = ''})
+    // }
+
+    let commentListComments = [];
+
+
+const buildComments = (comment, comauthor, comdate) => {
 
     const postComments = document.createElement('div');
     postComments.classList.add('listed-comments');
 
-    const commentBody = document.createElement('p');
-    commentBody.classList.add('comment-body');
-    commentBody.textContent = comment;
+    // postComments.innerHTML = `
+    //     <p class="comment-body">${comment}</p>
+    //     <div class="comment-heading">
+    //         <h4 class="commentor">${comauthor}</h4>
+    //         <p class="comment-date">${comdate}</p>
+    //     </div>
+    //     <div class="comment-edit">
+    //         <button class="edit-com">Edit Comment</button>
+    //         <button class="del-com">Delete Comment</button>
+    //     </div>
+    // `;
 
-    const commentFooter = document.createElement('div');
-    commentFooter.classList.add('comment-heading');
+    const postedComments = `
+    <p class="comment-body">${comment}</p>
+    <div class="comment-heading">
+        <h4 class="commentor">${comauthor}</h4>
+        <p class="comment-date">${comdate}</p>
+    </div>
+    `;
 
-    const commentAuthor = document.createElement('h4')
-    commentAuthor.classList.add('commentor')
-    commentAuthor.textContent = comauthor;
-    commentFooter.append(commentAuthor);
+    const manageComments = `
+    <div class="comment-edit">
+        <button class="edit-com">Edit Comment</button>
+        <button class="del-com">Delete Comment</button>
+    </div>
 
-    const commentDate = document.createElement('p')
-    commentDate.classList.add('comment-date');
-    commentDate.textContent = comdate;
-    commentFooter.append(commentDate);
+    `
 
-    const commentEdit = document.createElement('div')
-    commentEdit.classList.add('comment-edit')
+    if (userId === comauthor.id) {
+        postComments.innerHTML = postedComments + manageComments;
+    } else {
+        postComments.innerHTML = postedComments;
+    }
 
 
-    const comUpdate = document.createElement('button');
-    comUpdate.classList.add('edit-com')
+
+
+    const comUpdate = document.querySelector('.edit-com');
+    const comDel = document.querySelector('.del-com')
+
+
+    postBox.append(postComments);
+    // const commentBody = document.createElement('p');
+    // commentBody.classList.add('comment-body');
+    // commentBody.textContent = comment;
+
+    // const commentFooter = document.createElement('div');
+    // commentFooter.classList.add('comment-heading');
+
+    // const commentAuthor = document.createElement('h4')
+    // commentAuthor.classList.add('commentor')
+    // commentAuthor.textContent = comauthor;
+    // commentFooter.append(commentAuthor);
+
+    // const commentDate = document.createElement('p')
+    // commentDate.classList.add('comment-date');
+    // commentDate.textContent = comdate;
+    // commentFooter.append(commentDate);
+
+    // const commentEdit = document.createElement('div')
+    // commentEdit.classList.add('comment-edit')
+
+
+    // const comUpdate = document.createElement('button');
+    // comUpdate.classList.add('edit-com')
     comUpdate.addEventListener('click', updateCommentFunc)
-    commentEdit.append(comUpdate);
+    // commentEdit.append(comUpdate);
 
-    const comDel = document.createElement('button');
-    comDel.classList.add('del-com')
+    // const comDel = document.createElement('button');
+    // comDel.classList.add('del-com')
     comDel.addEventListener('click', deleteCommentFunc)
-    commentEdit.append(comDel);
+    // commentEdit.append(comDel);
 
 
-    postComments.append(commentBody);
-    postComments.append(commentFooter);
-    postComments.append(commentEdit);
+    // postComments.append(commentBody);
+    // postComments.append(commentFooter);
+    // postComments.append(commentEdit);
 
 
     //Add conditional statement: if commentator iD = userID, then show edit/delete comment
 
 
+
     return postComments
+}
+
+renderedcomments.forEach((comment) => {
+    const coms = buildComments(comment.body, comment.author, comment.date);
+    coms.dataset.comment = JSON.stringify(comment);
+
+    commentListComments.push(coms);
+})
+
+commentListComments.forEach((comment) => {
+    if (comment.id === blogpost.comments.id) {
+    postBox.append(comment)
+    }
+})
+
 }
 
 
